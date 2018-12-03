@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch-discovery
+  labels:
+    app: elasticsearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+      role: discovery
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+        role: discovery
+        tier: backend
+    spec:
+      containers:
+      - name: elasticsearch-discovery
+        image: ibivibiv/elasticsearch5
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9200
+        - containerPort: 9300
